@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Hello</title>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>NAME</th>
+                <th>AGE</th>
+            </tr>
+        </thead>
+        <tbody th:each="person : ${people}">
+            <tr>
+                <th th:text="${person.getName()}"></th>
+                <th th:text="${person.getAge()}"></th>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,10 @@
+<img src="assets/images/ELCA_Logo2.JPG" alt="Elca logo" />
+
+<nav>
+  <div class="nav-content">
+    <h2 *ngIf="username != null">Welcome, {{username}}</h2>
+    <ul>
+      <li><a (click)="onLogOut()" routerLink="/login">Log out</a></li>
+    </ul>
+  </div>
+</nav>

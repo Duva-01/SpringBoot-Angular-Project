@@ -1,0 +1,104 @@
+@if (isAddingUser){
+  <app-create-user-dialog (close)="onCreateClose()" (userCreated)="loadUsers()"></app-create-user-dialog>
+}
+
+@if (isUpdatingUser){
+  <app-update-user-dialog [userId]="selectedUserId" (close)="onUpdateClose()" (userUpdated)="loadUsers()"></app-update-user-dialog>
+}
+
+@if (isDeletingUser){
+  <app-delete-dialog [objectName]="'User'" (confirm)="onConfirmDelete()" (cancel)="onCancelDelete()"></app-delete-dialog>
+}
+
+@if (isManagingUserImage) {
+  <app-user-images-dialog [userId]="selectedUserId" (close)="onUserImageClose()" ></app-user-images-dialog>
+}
+
+<h4>List of Users</h4>
+<hr>
+
+<div id="options">
+  <button class="elca-button" type="submit" (click)="onCreate()">Create</button>
+  <button class="elca-button" type="submit" (click)="onUpdate()">Update</button>
+  <button class="icon-button" type="submit" (click)="confirmDelete()">
+    <img class="icon-img" src="assets/images/DeleteIcon.JPG" alt="Delete Icon" />
+  </button>
+  <button class="elca-button" type="submit" (click)="onUserImage()">Manage User's Image</button>
+</div>
+
+<div class="table-container">
+  <table>
+    <thead>
+    <tr class="table-titles">
+      <th>Selected</th>
+      <th>Gender</th>
+      <th>username</th>
+      <th>Full Name</th>
+      <th>Creation</th>
+      <th>Age</th>
+      <th>Breakfast</th>
+      <th>Job Position</th>
+      <th class="main-address">Main Address</th>
+      <th>Extra Addresses</th>
+    </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let person of users; let i = index">
+
+        <td>
+          <input
+            type="radio"
+            name="selectedUser"
+            id="selectedUser"
+            [value]="i"
+            [(ngModel)]="selectedUserIndex"
+            (change)="onSelectUser(i)">
+        </td>
+
+        @if (person.user.gender.name == "Male"){
+          <td><img class="icon-img-table" src="assets/images/Male.JPG" alt="Male Icon" /></td>
+        }
+        @else if (person.user.gender.name == "Female") {
+          <td><img class="icon-img-table" src="assets/images/Female.JPG" alt="Female Icon" /></td>
+        } @else {
+          <td><img class="icon-img-table" src="assets/images/Unknown.jpg" alt="Unknown Icon" /></td>
+        }
+        <td> {{ person.user.username }} </td>
+
+        <td class="max-column" title="{{person.user.first_surname}} {{ person.user.second_surname }}, {{ person.user.first_name }}"> {{ person.user.first_surname }}
+
+          @if (person.user.second_surname) {
+            {{ person.user.second_surname }}
+          },
+
+          {{ person.user.first_name }}
+
+        </td>
+
+        <td> {{ person.user.creation_datetime | date:"dd/MM/yyyy HH:mm" }}</td>
+        <td> {{ calculateAge(person.user.birthdate) }}</td>
+
+        @if (person.user.time_of_breakfast != null) {
+          <td> {{ convertToDate(person.user.time_of_breakfast)  | date:"HH:mm" }}</td>
+        }@else {
+          <td> - </td>
+        }
+
+        @if (person.user.job_position != null) {
+          <td> {{ person.user.job_position.name }}</td>
+        }@else {
+          <td> - </td>
+        }
+
+        <td class="max-column" title="{{ getMainAddress(person.addresses) }}">
+          {{ getMainAddress(person.addresses) }}
+        </td>
+
+        <td> {{ person.addresses.length }} </td>
+
+      </tr>
+    </tbody>
+
+  </table>
+</div>

@@ -1,0 +1,52 @@
+<dialog open>
+  <form [formGroup]="jobPositionForm" (ngSubmit)="saveJobPositions()">
+    <b>Manage Job Positions</b>
+
+    <div class="options">
+      <button class="elca-button" type="button" (click)="onCreateNewJobPosition()">Create</button>
+
+      <button class="elca-button" type="button" (click)="onUpdateJobPosition()" [disabled]="selectedJobPositionIndex === null">Update</button>
+
+      <button class="icon-button" type="button" (click)="deleteJobPosition()" [disabled]="selectedJobPositionIndex === null">
+        <img class="icon-img" src="assets/images/DeleteIcon.JPG" alt="Delete Icon" />
+      </button>
+    </div>
+
+    <div class="table-container">
+      <table>
+        <thead>
+        <tr class="table-titles">
+          <th>Selected</th>
+          <th>Name</th>
+        </tr>
+        </thead>
+
+        <tbody formArrayName="jobPositions">
+        <tr *ngFor="let jobPosition of jobPositions.controls; let i = index" [formGroupName]="i">
+          <td>
+            <input
+              type="radio"
+              name="selectedJobPosition"
+              [checked]="i === selectedJobPositionIndex"
+              (click)="selectJobPosition(i)">
+          </td>
+          <td>
+            <input type="text" formControlName="name">
+            <div *ngIf="jobPosition.get('name')?.hasError('duplicateName') && jobPosition.get('name')?.touched" class="error">
+              Name is already in use.
+            </div>
+
+          </td>
+        </tr>
+        </tbody>
+
+      </table>
+    </div>
+
+    <div class="dialog-buttons">
+      <button class="elca-button" type="submit">Save</button>
+      <button class="cancel-button" type="button" (click)="onCancel()">Close</button>
+    </div>
+
+  </form>
+</dialog>

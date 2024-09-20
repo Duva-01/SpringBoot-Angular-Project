@@ -1,0 +1,162 @@
+dialog {
+  border: 2px solid lightgray;
+  border-radius: 5px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.grid-item {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  color: gray;
+  font-size: 0.85rem;
+  margin-bottom: 5px;
+}
+
+input, select {
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid lightgray;
+}
+
+/*******************************************************/
+
+#options {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.blue-button {
+  margin: 10px;
+  padding: 10px 15px;
+  border-radius: 4px;
+  border: 1px solid dodgerblue;
+  background-color: dodgerblue;
+  color: white;
+}
+
+.cancel-button {
+  margin: 10px;
+  padding: 10px 15px;
+  border-radius: 4px;
+  border: 1px solid lightgray;
+}
+
+.divider {
+  width: 50%;
+  margin: auto;
+  border-top: 1px solid black;
+}
+
+/*******************************************************/
+
+
+#addressOptions {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.elca-button, .icon-button {
+  margin: 10px;
+  padding: 10px 15px;
+  border-radius: 4px;
+  border: 1px solid dodgerblue;
+  background-color: dodgerblue;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-button {
+  padding: 10px;
+}
+
+.icon-img {
+  width: 25px;
+  height: 25px;
+}
+
+.elca-button:hover {
+  background-color: #0056b3;
+}
+
+.icon-button:hover {
+  background-color: #0056b3;
+}
+
+.blue-button:hover {
+  background-color: #0056b3;
+}
+
+
+/*******************************************************/
+
+.table-container {
+  max-height: 200px;
+  overflow-y: auto;
+  overflow-x: auto;
+  scrollbar-color: #da0000 white;
+  border: 1px solid lightgray;
+  padding: 10px;
+  background-color: #fff;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9em;
+  font-family: sans-serif;
+}
+
+.table-titles th {
+  padding: 12px 15px;
+  text-align: center;
+  border: 1px solid #ba0000;
+}
+
+table thead {
+  background-color: #da0000;
+  color: white;
+}
+
+table tbody td {
+  padding: 12px 15px;
+  text-align: center;
+  border: 1px solid #ba0000;
+}
+
+table tbody tr {
+  background-color: #ffd2d2;
+}
+
+table tbody tr:nth-child(odd) {
+  background-color: white;
+}
+
+/*******************************************************/
+
+.error {
+  background-color: #ff6161;
+  padding: 5px;
+  margin: 10px;
+  border-radius: 4px;
+  border: 1px solid lightgray;
+  color: white;
+  text-align: center;
+}

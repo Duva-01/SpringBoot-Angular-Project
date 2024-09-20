@@ -1,0 +1,27 @@
+<div class="login-container">
+
+  <img src="assets/images/ELCA_Logo2.JPG" alt="Elca logo" />
+
+  <form class="login-form-container" (ngSubmit)="onLogin()">
+
+    <label>Username</label>
+    <input type="text" name="username" [(ngModel)]="username"/>
+
+    <label>Password</label>
+    <input type="password" name="password" [(ngModel)]="password"/>
+
+    @if(error){
+      <div id="error-container">
+        <p>Invalid credentials</p>
+      </div>
+    }
+
+    <button class="elca-button" type="submit">Log in</button>
+
+  </form>
+
+</div>
+
+
+
+

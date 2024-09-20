@@ -1,0 +1,26 @@
+<dialog open>
+  <form [formGroup]="userImageForm">
+    <div class="dialog-header">
+      <h4>Manage User Image</h4>
+    </div>
+
+    <div class="image-container">
+      <img *ngIf="userImage?.image" [src]="'data:image/jpeg;base64,' + userImage?.image" alt="User Image" class="user-image" />
+      <input
+        type="file"
+        (change)="onFileSelected($event)"
+        [attr.accept]="'image/*'"
+      />
+    </div>
+
+    <div class="dialog-buttons">
+      <button class="elca-button" type="submit" (click)="onUploadCreateImage()">
+        {{ userImage ? 'Upload Image' : 'Create Image' }}
+      </button>
+      <button class="icon-button" type="button" (click)="deleteImage()" [disabled]="!userImage">
+        <img class="icon-img" src="assets/images/DeleteIcon.JPG" alt="Delete Icon" />
+      </button>
+      <button class="cancel-button" type="button" (click)="onCancel()">Close</button>
+    </div>
+  </form>
+</dialog>

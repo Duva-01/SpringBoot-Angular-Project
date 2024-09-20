@@ -1,0 +1,22 @@
+<app-header></app-header>
+
+@if (isManagingGenders) {
+  <app-genders-list
+    (close)="onManagingGenderClose()"
+    (changesSaved)="onUsersChanged()">
+  </app-genders-list>
+}
+
+@if (isManagingJobPositions) {
+  <app-job-positions-list
+    (close)="onManagingJobPositionClose()"
+    (changesSaved)="onUsersChanged()">
+  </app-job-positions-list>
+}
+
+<div id="options">
+  <button class="elca-button" type="submit" (click)="onManagingGender()">Manage Genders</button>
+  <button class="elca-button" type="submit" (click)="onManagingJobPosition()">Manage Job Positions</button>
+</div>
+
+<app-users-list #usersList></app-users-list>

@@ -1,0 +1,161 @@
+<dialog open *ngIf="userForm">
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <b>Update User</b>
+
+    <div class="grid-container">
+
+      <div class="grid-item">
+        <label for="username">Username:</label>
+        <input id="username" formControlName="username" type="text">
+        <div *ngIf="userForm.get('username')?.hasError('required') && userForm.get('username')?.touched" class="error">
+          Username is required.
+        </div>
+        <div *ngIf="userForm.get('username')?.hasError('minlength') && userForm.get('username')?.touched" class="error">
+          Username must be at least 3 characters long.
+        </div>
+        <div *ngIf="userForm.get('username')?.hasError('usernameTaken') && userForm.get('username')?.touched" class="error">
+          Username is already taken.
+        </div>
+      </div>
+
+      <div class="grid-item">
+        <label for="password">Password:</label>
+        <input id="password" formControlName="password" type="password">
+        <div *ngIf="userForm.get('password')?.hasError('required') && userForm.get('password')?.touched" class="error">
+          Password is required.
+        </div>
+        <div *ngIf="userForm.get('password')?.hasError('pattern') && userForm.get('password')?.touched" class="error">
+          Invalid Password
+        </div>
+      </div>
+
+      <div class="grid-item">
+        <label>Creation Date:</label>
+        <p>{{ userForm.get('creationDate')?.value | date: "yyyy-MM-dd HH:mm" }}</p>
+      </div>
+
+      <!-- ********************************************************************* -->
+
+      <div class="grid-item">
+        <label for="firstName">First Name:</label>
+        <input id="firstName" formControlName="firstName" type="text">
+        <div *ngIf="userForm.get('firstName')?.hasError('required') && userForm.get('firstName')?.touched" class="error">
+          First name is required.
+        </div>
+      </div>
+
+      <div class="grid-item">
+        <label for="firstSurname">First Surname:</label>
+        <input id="firstSurname" formControlName="firstSurname" type="text">
+        <div *ngIf="userForm.get('firstSurname')?.hasError('required') && userForm.get('firstSurname')?.touched" class="error">
+          First Surname is required.
+        </div>
+      </div>
+
+      <div class="grid-item">
+        <label for="secondSurname">Second Surname:</label>
+        <input id="secondSurname" formControlName="secondSurname" type="text">
+      </div>
+
+      <!-- ********************************************************************* -->
+
+      <div class="grid-item">
+        <label for="birthDate">Birth Date:</label>
+        <input id="birthDate" formControlName="birthDate" type="datetime-local">
+        <div *ngIf="userForm.get('birthDate')?.hasError('required') && userForm.get('birthDate')?.touched" class="error">
+          Birthdate is required.
+        </div>
+        <div *ngIf="userForm.get('birthDate')?.hasError('birthDateInvalid') && userForm.get('birthDate')?.touched" class="error">
+          Birthdate must be before today.
+        </div>
+      </div>
+
+      <div class="grid-item">
+        <label for="gender">Gender:</label>
+        <select id="gender" formControlName="gender">
+          <option *ngFor="let gender of genders" value="{{gender.name}}">{{gender.name}}</option>
+        </select>
+        <div *ngIf="userForm.get('gender')?.hasError('required') && userForm.get('gender')?.touched" class="error">
+          Gender is required.
+        </div>
+      </div>
+
+      <div class="grid-item">
+        <label for="jobPosition">Job Position:</label>
+        <select id="jobPosition" formControlName="jobPosition">
+          <option *ngFor="let jobPosition of jobPositions" value="{{jobPosition.name}}">{{jobPosition.name}}</option>
+        </select>
+      </div>
+
+
+      <!-- ********************************************************************* -->
+
+      <div class="grid-item">
+        <label for="breakfastTime">Breakfast Time:</label>
+        <input id="breakfastTime" formControlName="breakfastTime" type="time">
+        <div *ngIf="userForm.get('breakfastTime')?.hasError('required') && userForm.get('breakfastTime')?.touched" class="error">
+          Breakfast Time is required.
+        </div>
+        <div *ngIf="userForm.get('breakfastTime')?.hasError('invalidTime') && userForm.get('breakfastTime')?.touched" class="error">
+          Invalid time format.
+        </div>
+      </div>
+
+    </div>
+
+    <hr class="divider">
+
+    <!-------------------------------------------------------------------------->
+
+    <b>Addresses</b>
+
+    <div id="addressOptions">
+      <button class="elca-button" type="button" (click)="addAddress()">Create</button>
+      <button class="elca-button" type="button" (click)="updateAddress()">Update</button>
+      <button class="icon-button" type="button" (click)="deleteAddress(selectedAddressIndex)">
+        <img class="icon-img" src="assets/images/DeleteIcon.JPG" alt="Delete Icon" />
+      </button>
+    </div>
+
+    <div class="table-container">
+      <table>
+        <thead>
+        <tr class="table-titles">
+          <th>Selected</th>
+          <th>Main</th>
+          <th>Street Name</th>
+          <th>Number</th>
+        </tr>
+        </thead>
+
+        <tbody formArrayName="addresses">
+        <tr *ngFor="let address of addresses.controls; let i = index" [formGroupName]="i">
+          <td>
+            <input type="radio"
+                   name="selectedAddress"
+                   [checked]="i === selectedAddressIndex"
+                   (click)="selectAddress(i)">
+          </td>
+          <td>
+            <input type="radio"
+                   name="mainAddress"
+                   [checked]="i === selectedMainAddressIndex"
+                   (click)="selectMainAddress(i)">
+          </td>
+          <td>
+            <input type="text" formControlName="street_name">
+          </td>
+          <td>
+            <input type="text" formControlName="street_number">
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="options">
+      <button class="blue-button" type="submit">Save</button>
+      <button class="cancel-button" type="button" (click)="onCancel()">Cancel</button>
+    </div>
+  </form>
+</dialog>

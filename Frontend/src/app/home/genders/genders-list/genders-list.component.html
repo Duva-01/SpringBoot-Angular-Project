@@ -1,0 +1,51 @@
+<dialog open>
+  <form [formGroup]="gendersForm" (ngSubmit)="saveGenders()">
+    <b>Manage Genders</b>
+
+    <div class="options">
+      <button class="elca-button" type="button" (click)="onCreateNewGender()">Create</button>
+
+      <button class="elca-button" type="button" (click)="onUpdateGender()" [disabled]="selectedGenderIndex === null">Update</button>
+
+      <button class="icon-button" type="button" (click)="deleteGender()" [disabled]="selectedGenderIndex === null">
+        <img class="icon-img" src="assets/images/DeleteIcon.JPG" alt="Delete Icon" />
+      </button>
+    </div>
+
+    <div class="table-container">
+      <table>
+        <thead>
+        <tr class="table-titles">
+          <th>Selected</th>
+          <th>Name</th>
+        </tr>
+        </thead>
+
+        <tbody formArrayName="genders">
+        <tr *ngFor="let gender of genders.controls; let i = index" [formGroupName]="i">
+          <td>
+            <input
+              type="radio"
+              name="selectedGender"
+              [checked]="i === selectedGenderIndex"
+              (click)="selectGender(i)">
+          </td>
+          <td>
+            <input type="text" formControlName="name">
+            <div *ngIf="gender.get('name')?.hasError('duplicateName') && gender.get('name')?.touched" class="error">
+              Name is already in use.
+            </div>
+          </td>
+        </tr>
+        </tbody>
+
+      </table>
+    </div>
+
+    <div class="dialog-buttons">
+      <button class="elca-button" type="submit">Save</button>
+      <button class="cancel-button" type="button" (click)="onCancel()">Close</button>
+    </div>
+
+  </form>
+</dialog>

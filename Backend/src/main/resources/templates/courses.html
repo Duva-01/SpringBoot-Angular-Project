@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Courses</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="mb-4">Courses</h1>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Hours</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="course : ${courses}">
+            <td><span th:text="${course.name}"></span></td>
+            <td><span th:text="${course.description}"></span></td>
+            <td><span th:text="${course.price}"></span></td>
+            <td><span th:text="${course.hours}"></span></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h2 class="mt-5">Add Course</h2>
+    <form class="mb-4" action="#" th:action="@{/courses/addcourse}" th:object="${course}" method="post">
+        <div class="form-group">
+            <label for="name">Name (unique):</label>
+            <input type="text" id="name" class="form-control" th:field="*{name}"/>
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <input type="text" id="description" class="form-control" th:field="*{description}"/>
+        </div>
+        <div class="form-group">
+            <label for="price">Price:</label>
+            <input type="number" id="price" class="form-control" th:field="*{price}"/>
+        </div>
+        <div class="form-group">
+            <label for="hours">Hours:</label>
+            <input type="number" id="hours" class="form-control" th:field="*{hours}"/>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    <h2 class="mt-5">Update Course</h2>
+    <form class="mb-4" action="#" th:action="@{/courses/updatecourse}" th:object="${course}" method="post">
+
+        <div class="form-group">
+            <label for="name">Name (unique):</label>
+            <input type="text"  class="form-control" th:field="*{name}"/>
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <input type="text"  class="form-control" th:field="*{description}"/>
+        </div>
+        <div class="form-group">
+            <label for="price">Price:</label>
+            <input type="number" class="form-control" th:field="*{price}"/>
+        </div>
+        <div class="form-group">
+            <label for="hours">Hours:</label>
+            <input type="number" class="form-control" th:field="*{hours}"/>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    <h2 class="mt-5">Delete Course</h2>
+    <form action="#" th:action="@{/courses/removecourse}" th:object="${course}" method="post">
+        <div class="form-group">
+            <label for="deleteName">Name (unique):</label>
+            <input type="text" id="deleteName" class="form-control" th:field="*{name}"/>
+        </div>
+        <button type="submit" class="btn btn-danger mb-5">Delete</button>
+    </form>
+</div>
+
+
+</body>
+</html>

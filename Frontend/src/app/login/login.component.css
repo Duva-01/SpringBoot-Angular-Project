@@ -1,0 +1,66 @@
+.login-container{
+  display: grid;
+  place-content: center;
+  place-items: center;
+}
+
+.login-container img{
+  margin: 50px;
+  width: 400px;
+
+}
+
+form {
+  padding: 20px;
+  margin: 50px;
+  width: 200px;
+  min-height: 250px;
+
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px -2px #888;
+  position: relative;
+}
+
+label {
+  color: gray;
+  display: block;
+  font-size: 0.85rem;
+  margin: 10px 5px 5px 5px ;
+}
+
+input {
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid lightgray;
+}
+
+
+.elca-button{
+
+  margin: 10px;
+  padding: 10px 15px 10px 15px;
+  border-radius: 4px;
+  border: 1px solid dodgerblue;
+  display: flex;
+  background-color: dodgerblue;
+  color: white;
+
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.elca-button:hover {
+  background-color: #0056b3;
+}
+
+#error-container {
+  background-color: #ff6161;
+  padding: 2px;
+  margin: 10px;
+  border-radius: 4px;
+  border: 1px solid lightgray;
+  color: white;
+  text-align: center;
+}
